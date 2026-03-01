@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: var(--color-primary-50, #fff1f2);
+  --color-primary-100: var(--color-primary-100, #ffe4e6);
+  --color-primary-200: var(--color-primary-200, #fecdd3);
+  --color-primary-300: var(--color-primary-300, #fda4af);
+  --color-primary-400: var(--color-primary-400, #fb7185);
+  --color-primary-500: var(--color-primary);
+  --color-primary-600: var(--color-primary-dark);
+  --color-primary-700: #be123c;
+  --color-primary-800: #9f1239;
+  --color-primary-900: #881337;
+  --color-primary-950: #4c0519;
+
+  /* Neon Colors */
+  --color-neon-pink: #ff00ff;
+  --color-neon-cyan: #00ffff;
+  --color-neon-purple: #bc13fe;
+  --color-neon-blue: #0000ff;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --glow-pink: 0 0 10px rgba(255, 0, 255, 0.5), 0 0 20px rgba(255, 0, 255, 0.3);
+  --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+.dark {
+  /* --color-primary-500: #ff00ff; Removed to allow user customization */
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  @apply bg-slate-50 text-slate-900 antialiased transition-colors duration-300;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.dark body {
+  background-color: #030014;
+  color: white;
+  background-image:
+    linear-gradient(rgba(18, 16, 33, 0.5) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(18, 16, 33, 0.5) 2px, transparent 2px);
+  background-size: 40px 40px;
+}
+
+.neon-border {
+  @apply border-primary-500 shadow-[var(--glow-pink)];
+}
+
+.neon-text {
+  @apply text-primary-500;
+  filter: drop-shadow(0 0 5px rgba(244, 63, 84, 0.5));
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanlines::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 33, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
+}
